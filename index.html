@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easter Celebration - The Resurrection Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #7e57c2;
+            --secondary: #ffca28;
+            --accent: #ff7043;
+            --light: #f5f5f5;
+            --dark: #3a2c60;
+        }
+
+        body {
+            background-color: var(--light);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 1rem 0;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .cross-icon {
+            margin-right: 10px;
+            font-size: 1.5rem;
+            transform: translateY(-2px);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            background: url('/api/placeholder/1200/600') center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 600px;
+            padding: 2rem;
+            background: rgba(62, 44, 96, 0.85);
+            border-radius: 10px;
+            animation: fadeIn 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--secondary);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #ffd54f;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            height: 4px;
+            width: 80px;
+            background-color: var(--secondary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .easter-story {
+            background-color: white;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding: 1.5rem 2rem;
+            position: relative;
+            width: 45%;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: auto;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -40px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -40px;
+        }
+
+        .timeline-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .timeline-content p {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .interactive-section {
+            background-color: var(--light);
+        }
+
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .flip-card {
+            width: 300px;
+            height: 250px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .flip-card-front {
+            background-color: white;
+            color: var(--dark);
+        }
+
+        .flip-card-back {
+            background-color: var(--primary);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .flip-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .celebration {
+            background-color: white;
+            text-align: center;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--dark);
+            color: white;
+            border-radius: 10px;
+            min-width: 100px;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .prayers-container {
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .prayer {
+            font-style: italic;
+            line-height: 1.8;
+            position: relative;
+            padding: 0 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .prayer::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+            left: -10px;
+            top: -20px;
+        }
+
+        .prayer::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+            right: -10px;
+            bottom: -40px;
+        }
+
+        .contact {
+            background-color: var(--dark);
+            color: white;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input, textarea {
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background-color: #ff8a65;
+        }
+
+        footer {
+            background-color: #2a1f45;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 10;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: modalFadeIn 0.4s ease;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation for floating crosses */
+        .floating-cross {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: rgba(126, 87, 194, 0.2);
+            animation: float 15s linear infinite;
+            z-index: 0;
+        }
+
+        .floating-cross::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 6px;
+            height: 100%;
+            background-color: rgba(126, 87, 194, 0.8);
+            transform: translateX(-50%);
+        }
+
+        .floating-cross::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: rgba(126, 87, 194, 0.8);
+            transform: translateY(-50%);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100px, -200px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive design */
+        @media screen and (max-width: 768px) {
+            .hero {
+                height: 400px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 50px);
+                margin-left: 50px;
+            }
+
+            .timeline-item:nth-child(even) {
+                margin-left: 50px;
+            }
+
+            .timeline-item:nth-child(odd)::before,
+            .timeline-item:nth-child(even)::before {
+                left: -30px;
+            }
+
+            .countdown-container {
+                flex-wrap: wrap;
+            }
+
+            .countdown-item {
+                min-width: 80px;
+                padding: 0.8rem;
+            }
+
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            nav li {
+                margin: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <span class="cross-icon">✝</span> Easter <span>Celebration</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#story">Story</a></li>
+                    <li><a href="#interactive">Reflection</a></li>
+                    <li><a href="#celebration">Celebration</a></li>
+                    <li><a href="#contact">Connect</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Experience the Easter <span style="color: var(--secondary)">Journey</span></h1>
+                <p>Join us in celebrating the resurrection of Jesus Christ, the cornerstone of Christian faith and hope. Discover the profound message of Easter and its significance for humanity.</p>
+                <button class="btn" id="learnMoreBtn">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="story" class="easter-story">
+        <div class="container">
+            <h2 class="section-title">The Resurrection Story</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Palm Sunday</h3>
+                        <p>Jesus enters Jerusalem riding on a donkey as crowds welcome Him with palm branches, fulfilling the prophecy of the coming Messiah.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Last Supper</h3>
+                        <p>Jesus shares His final Passover meal with His disciples, establishing the sacrament of communion and preparing them for what is to come.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Garden of Gethsemane</h3>
+                        <p>Jesus prays intensely before His arrest, showing His humanity and submission to God's will despite the suffering ahead.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Crucifixion</h3>
+                        <p>Jesus is crucified at Golgotha, taking upon Himself the sins of humanity and fulfilling His purpose as the ultimate sacrifice.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>The Resurrection</h3>
+                        <p>On the third day, Jesus rises from the dead, conquering death and sin, bringing hope and the promise of eternal life to all believers.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Great Commission</h3>
+                        <p>The risen Christ appears to His disciples and commissions them to share the good news of salvation throughout the world.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="interactive" class="interactive-section">
+        <div class="container">
+            <h2 class="section-title">Reflect & Discover</h2>
+            <div class="cards-container">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flip-card-icon">❤️</div>
+                            <h3>Love</h3>
+                            <p>Hover to reflect</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Divine Love</h3>
+                            <p>"For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life." - John 3:16</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flip-card-icon">✝️</div>
+                            <h3>Sacrifice</h3>
+                            <p>Hover to reflect</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>The Ultimate Sacrifice</h3>
+                            <p>"Greater love has no one than this, than to lay down one's life for his friends." - John 15:13</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flip-card-icon">🕊️</div>
+                            <h3>Hope</h3>
+                            <p>Hover to reflect</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Living Hope</h3>
+                            <p>"Blessed be the God and Father of our Lord Jesus Christ, who according to His abundant mercy has begotten us again to a living hope through the resurrection of Jesus Christ from the dead." - 1 Peter 1:3</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="celebration" class="celebration">
+        <div class="container">
+            <h2 class="section-title">Celebrate With Us</h2>
+            <p>Join our upcoming Easter service and activities. Experience the joy of the resurrection!</p>
+            
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+            
+            <button class="btn" id="prayerBtn">Share an Easter Prayer</button>
+            
+            <div class="prayers-container">
+                <div class="prayer" id="prayer">
+                    "Heavenly Father, thank You for the gift of salvation through the resurrection of Your Son Jesus Christ. May His light shine in our hearts today and always, filling us with hope and joy. Amen."
+                </div>
+                <button class="btn" id="newPrayerBtn">New Prayer</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Connect With Us</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message or Prayer Request</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-accent">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="#" class="social-icon">f</a>
+                <a href="#" class="social-icon">in</a>
+                <a href="#" class="social-icon">🐦</a>
+                <a href="#" class="social-icon">📷</a>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">About Us</a>
+                <a href="#" class="footer-link">Services</a>
+                <a href="#" class="footer-link">Events</a>
+                <a href="#" class="footer-link">Support</a>
+            </div>
+            <p class="copyright">© 2025 Easter Celebration | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h3>The Meaning of Easter</h3>
+            <p>Easter celebrates the resurrection of Jesus Christ from the dead, which is the foundation of Christian faith. After His crucifixion and burial, Jesus rose from the dead on the third day, conquering sin and death.</p>
+            <p>This miraculous event offers hope, redemption, and the promise of eternal life to all who believe. It reminds us that through faith in Christ, we too can experience new life and spiritual transformation.</p>
+            <button class="btn" id="closeModalBtn">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Create floating crosses
+        function createFloatingCrosses() {
+            const numberOfCrosses = 12;
+            const container = document.querySelector('body');
+            
+            for (let i = 0; i < numberOfCrosses; i++) {
+                const cross = document.createElement('div');
+                cross.classList.add('floating-cross');
+                
+                // Random position
+                const posX = Math.random() * window.innerWidth;
+                const posY = Math.random() * window.innerHeight;
+                
+                // Random size
+                const size = Math.random() * 20 + 15;
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 10 + 10;
+                const delay = Math.random() * 5;
+                
+                cross.style.width = `${size}px`;
+                cross.style.height = `${size}px`;
+                cross.style.left = `${posX}px`;
+                cross.style.top = `${posY}px`;
+                cross.style.animationDuration = `${duration}s`;
+                cross.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(cross);
+            }
+        }
+        
+        // Animation for timeline items
+        function animateOnScroll() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            timelineItems.forEach(item => {
+                observer.observe(item);
+            });
+        }
+        
+        // Countdown timer
+        // Countdown timer - UPDATED VERSION
+function startCountdown() {
+    // Function to calculate Easter date for any given year
+    function calculateEaster(year) {
+        const a = year % 19;
+        const b = Math.floor(year / 100);
+        const c = year % 100;
+        const d = Math.floor(b / 4);
+        const e = b % 4;
+        const f = Math.floor((b + 8) / 25);
+        const g = Math.floor((b - f + 1) / 3);
+        const h = (19 * a + b - d - g + 15) % 30;
+        const i = Math.floor(c / 4);
+        const k = c % 4;
+        const l = (32 + 2 * e + 2 * i - h - k) % 7;
+        const m = Math.floor((a + 11 * h + 22 * l) / 451);
+        const month = Math.floor((h + l - 7 * m + 114) / 31);
+        const day = ((h + l - 7 * m + 114) % 31) + 1;
+        
+        return new Date(year, month - 1, day);
+    }
+
+    // Get the next Easter Sunday
+    function getNextEaster() {
+        const today = new Date();
+        const currentYear = today.getFullYear();
+        
+        // Check this year's Easter
+        const thisYearEaster = calculateEaster(currentYear);
+        if (today < thisYearEaster) {
+            return thisYearEaster;
+        }
+        
+        // Otherwise return next year's Easter
+        return calculateEaster(currentYear + 1);
+    }
+
+    const targetDate = getNextEaster();
+    
+    function updateCountdown() {
+        const currentDate = new Date();
+        const difference = targetDate - currentDate;
+        
+        if (difference <= 0) {
+            // Easter is here!
+            document.getElementById('days').innerText = '00';
+            document.getElementById('hours').innerText = '00';
+            document.getElementById('minutes').innerText = '00';
+            document.getElementById('seconds').innerText = '00';
+            
+            // Optionally, you could call getNextEaster() again to start counting down to next year
+            return;
+        }
+        
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        
+        document.getElementById('days').innerText = days < 10 ? `0${days}` : days;
+        document.getElementById('hours').innerText = hours < 10 ? `0${hours}` : hours;
+        document.getElementById('minutes').innerText = minutes < 10 ? `0${minutes}` : minutes;
+        document.getElementById('seconds').innerText = seconds < 10 ? `0${seconds}` : seconds;
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+}
+        
+        // Random prayer generator
+        function setupPrayerGenerator() {
+            const prayers = [
+                "Lord Jesus, thank You for Your sacrifice and resurrection. May the miracle of Easter fill our hearts with gratitude, hope, and joy. In Your holy name, we pray. Amen.",
+                "Heavenly Father, as we celebrate the resurrection of Your Son, help us to live as Easter people, sharing Your love and light with the world. Amen.",
+                "God of life, we rejoice in the resurrection of Your Son, Jesus Christ. Fill us with the hope that comes from knowing that death is conquered and eternal life is ours. Amen.",
+                "Dear Lord, thank You for the gift of salvation through Christ's death and resurrection. Help us to walk in newness of life, transformed by Your grace. Amen.",
+                "Father, Your love knows no bounds. Thank You for the cross and empty tomb that demonstrate the depth of Your love for us. May we live in gratitude and service. Amen."
+            ];
+            
+            document.getElementById('newPrayerBtn').addEventListener('click', function() {
+                const randomPrayer = prayers[Math.floor(Math.random() * prayers.length)];
+                const prayerElement = document.getElementById('prayer');
+                
+                // Animate prayer change
+                prayerElement.style.opacity = '0';
+                setTimeout(() => {
+                    prayerElement.innerText = randomPrayer;
+                    prayerElement.style.opacity = '1';
+                }, 300);
+            });
+            
+            document.getElementById('prayerBtn').addEventListener('click', function() {
+                document.querySelector('.prayers-container').scrollIntoView({ behavior: 'smooth' });
+         
+                prayerElement.style.opacity = '1';
+            });
+            
+            document.getElementById('prayerBtn').addEventListener('click', function() {
+                document.querySelector('.prayers-container').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+        
+        // Modal functionality
+        function setupModal() {
+            const modal = document.getElementById('modal');
+            const learnMoreBtn = document.getElementById('learnMoreBtn');
+            const closeModal = document.getElementById('closeModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            
+            learnMoreBtn.addEventListener('click', function() {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            function closeModalFunction() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            closeModal.addEventListener('click', closeModalFunction);
+            closeModalBtn.addEventListener('click', closeModalFunction);
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeModalFunction();
+                }
+            });
+        }
+        
+        // Form submission
+        function setupForm() {
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                // Here you would typically send this data to a server
+                // For demonstration, we'll just show an alert
+                alert(`Thank you, ${name}! Your message has been received. We'll get back to you at ${email} soon.`);
+                
+                // Clear the form
+                contactForm.reset();
+            });
+        }
+        
+        // Bible verse popups on scroll
+        function setupVersePopups() {
+            const verses = [
+                "He is not here; he has risen, just as he said. - Matthew 28:6",
+                "I am the resurrection and the life. - John 11:25",
+                "Because I live, you also will live. - John 14:19",
+                "By his power God raised the Lord from the dead. - 1 Corinthians 6:14"
+            ];
+            
+            let lastPopupTime = 0;
+            const popupDelay = 10000; // 10 seconds
+            
+            window.addEventListener('scroll', function() {
+                const now = Date.now();
+                if (now - lastPopupTime > popupDelay) {
+                    const randomVerse = verses[Math.floor(Math.random() * verses.length)];
+                    
+                    const popup = document.createElement('div');
+                    popup.style.position = 'fixed';
+                    popup.style.bottom = '20px';
+                    popup.style.right = '20px';
+                    popup.style.backgroundColor = 'var(--primary)';
+                    popup.style.color = 'white';
+                    popup.style.padding = '15px 20px';
+                    popup.style.borderRadius = '10px';
+                    popup.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.3)';
+                    popup.style.zIndex = '5';
+                    popup.style.maxWidth = '300px';
+                    popup.style.animation = 'fadeIn 0.5s ease';
+                    popup.innerText = randomVerse;
+                    
+                    document.body.appendChild(popup);
+                    
+                    lastPopupTime = now;
+                    
+                    // Auto-remove after 5 seconds
+                    setTimeout(() => {
+                        popup.style.opacity = '0';
+                        popup.style.transform = 'translateY(20px)';
+                        popup.style.transition = 'all 0.5s ease';
+                        
+                        setTimeout(() => {
+                            document.body.removeChild(popup);
+                        }, 500);
+                    }, 5000);
+                }
+            });
+        }
+        
+        // Interactive Easter egg hunt
+        function setupEasterEggHunt() {
+            const easterEggs = [
+                { emoji: '🥚', message: 'You found an Easter egg! "Rejoice in the Lord always." - Philippians 4:4' },
+                { emoji: '🐰', message: 'Easter bunny spotted! "This is the day the Lord has made; let us rejoice and be glad in it." - Psalm 118:24' },
+                { emoji: '🌷', message: 'You found a spring flower! "See! The winter is past; the rains are over and gone. Flowers appear on the earth." - Song of Solomon 2:11-12' }
+            ];
+            
+            // Create hidden Easter eggs throughout the page
+            for (let i = 0; i < 5; i++) {
+                const randomEgg = easterEggs[Math.floor(Math.random() * easterEggs.length)];
+                const egg = document.createElement('div');
+                egg.innerText = randomEgg.emoji;
+                egg.style.position = 'absolute';
+                egg.style.fontSize = '24px';
+                egg.style.cursor = 'pointer';
+                egg.style.opacity = '0.5';
+                egg.style.zIndex = '3';
+                
+                // Random position
+                const section = document.querySelectorAll('section')[Math.floor(Math.random() * document.querySelectorAll('section').length)];
+                const posX = Math.random() * 80 + 10; // 10-90% of section width
+                const posY = Math.random() * 80 + 10; // 10-90% of section height
+                
+                egg.style.left = `${posX}%`;
+                egg.style.top = `${posY}%`;
+                
+                egg.addEventListener('click', function() {
+                    alert(randomEgg.message);
+                    egg.style.opacity = '0';
+                    setTimeout(() => {
+                        egg.remove();
+                    }, 500);
+                });
+                
+                section.appendChild(egg);
+            }
+        }
+        
+        // Scripture quiz
+        function setupScriptureQuiz() {
+            const quizButton = document.createElement('button');
+            quizButton.innerText = 'Easter Quiz';
+            quizButton.classList.add('btn');
+            quizButton.style.position = 'fixed';
+            quizButton.style.bottom = '20px';
+            quizButton.style.left = '20px';
+            quizButton.style.zIndex = '5';
+            
+            document.body.appendChild(quizButton);
+            
+            const questions = [
+                {
+                    question: "Who first discovered that Jesus' tomb was empty?",
+                    options: ["Peter and John", "Mary Magdalene", "The Roman guards", "The Pharisees"],
+                    answer: 1
+                },
+                {
+                    question: "How many days was Jesus in the tomb before His resurrection?",
+                    options: ["1 day", "2 days", "3 days", "4 days"],
+                    answer: 2
+                },
+                {
+                    question: "What did the angel tell the women at the tomb?",
+                    options: [
+                        "Go tell the disciples Jesus is sleeping",
+                        "Do not be afraid; Jesus has risen",
+                        "Wait here for Jesus to return",
+                        "Keep this a secret"
+                    ],
+                    answer: 1
+                }
+            ];
+            
+            let currentQuestion = 0;
+            let score = 0;
+            
+            quizButton.addEventListener('click', function() {
+                // Reset quiz
+                currentQuestion = 0;
+                score = 0;
+                
+                // Start quiz
+                showQuestion();
+            });
+            
+            function showQuestion() {
+                if (currentQuestion >= questions.length) {
+                    // Quiz is finished
+                    alert(`Quiz complete! You scored ${score} out of ${questions.length}.`);
+                    return;
+                }
+                
+                const q = questions[currentQuestion];
+                let options = '';
+                
+                q.options.forEach((option, index) => {
+                    options += `${index + 1}: ${option}\n`;
+                });
+                
+                const answer = prompt(`Question ${currentQuestion + 1}/${questions.length}:\n${q.question}\n\n${options}\nEnter your answer (1-4):`);
+                
+                if (answer === null) return; // User canceled
+                
+                if (parseInt(answer) - 1 === q.answer) {
+                    score++;
+                    alert("Correct!");
+                } else {
+                    alert(`Incorrect. The correct answer is: ${q.options[q.answer]}`);
+                }
+                
+                currentQuestion++;
+                showQuestion();
+            }
+        }
+        
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingCrosses();
+            animateOnScroll();
+            startCountdown();
+            setupPrayerGenerator();
+            setupModal();
+            setupForm();
+            setupVersePopups();
+            setupEasterEggHunt();
+            setupScriptureQuiz();
+            
+            // Smooth scrolling for all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+</antArtifact>
